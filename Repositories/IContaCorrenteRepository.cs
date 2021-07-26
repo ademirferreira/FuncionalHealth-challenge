@@ -1,7 +1,6 @@
-﻿using System.Collections;
+﻿using FuncionalBank.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using FuncionalBank.Models;
 
 namespace FuncionalBank.Repositories
 {

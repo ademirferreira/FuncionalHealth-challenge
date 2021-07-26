@@ -1,12 +1,8 @@
-﻿using System;
+﻿using FuncionalBank.Data;
 using FuncionalBank.Models;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Threading.Tasks;
-using FuncionalBank.Data;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace FuncionalBank.Repositories
 {

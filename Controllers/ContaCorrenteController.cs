@@ -1,11 +1,9 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using FuncionalBank.Models;
+using FuncionalBank.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using FuncionalBank.Models;
-using FuncionalBank.Repositories;
 
 namespace FuncionalBank.Controllers
 {
