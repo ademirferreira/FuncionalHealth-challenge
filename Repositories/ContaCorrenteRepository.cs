@@ -31,5 +31,11 @@ namespace FuncionalBank.Repositories
             return conta;
         }
 
+        public async Task<string> GetSaldo(int numeroDaConta)
+        {
+            var conta = await GetConta(numeroDaConta);
+            if (conta is null) return null;
+            return "Saldo disponível: R$" + conta.Saldo;
+        }
     }
 }

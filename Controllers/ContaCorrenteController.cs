@@ -34,5 +34,14 @@ namespace FuncionalBank.Controllers
 
             return conta;
         }
+
+        [HttpGet("saldo")]
+        public async Task<ActionResult<string>> Saldo(int numeroDaConta)
+        {
+            var saldo = await _repository.GetSaldo(numeroDaConta);
+            if (saldo is null) return NotFound("Conta não encontrada");
+
+            return saldo;
+        }
     }
 }

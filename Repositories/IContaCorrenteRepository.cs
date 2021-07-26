@@ -9,5 +9,6 @@ namespace FuncionalBank.Repositories
     {
         Task<IEnumerable<ContaCorrente>> GetContas();
         Task<ContaCorrente> GetConta(int numeroDaConta);
+        Task<string> GetSaldo(int numeroDaConta);
     }
 }
