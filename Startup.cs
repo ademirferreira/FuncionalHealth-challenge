@@ -11,6 +11,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using FuncionalBank.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace FuncionalBank
 {
@@ -26,6 +28,8 @@ namespace FuncionalBank
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<ContaCorrenteContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("FuncionalBank")));
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
