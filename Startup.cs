@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using FuncionalBank.Data;
+using FuncionalBank.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 namespace FuncionalBank
@@ -31,6 +32,8 @@ namespace FuncionalBank
             services.AddDbContext<ContaCorrenteContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("FuncionalBank")));
 
+
+            services.AddScoped<IContaCorrenteRepository, ContaCorrenteRepository>();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
