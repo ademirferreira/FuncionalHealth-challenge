@@ -25,9 +25,10 @@ namespace FuncionalBank.Repositories
         public async Task<ContaCorrente> GetConta(int numeroDaConta)
         {
             var conta = await _context
-                .ContasCorrentes.FirstAsync(x => x.Numero == numeroDaConta);
+                .ContasCorrentes.AsNoTracking()
+                .FirstOrDefaultAsync(x => x.Numero == numeroDaConta);
 
-            return conta ?? null;
+            return conta;
         }
 
     }
