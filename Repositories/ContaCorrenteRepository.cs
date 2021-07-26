@@ -1,8 +1,11 @@
-﻿using FuncionalBank.Models;
+﻿using System;
+using FuncionalBank.Models;
 using System.Collections.Generic;
+using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using FuncionalBank.Data;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace FuncionalBank.Repositories
@@ -31,11 +34,37 @@ namespace FuncionalBank.Repositories
             return conta;
         }
 
-        public async Task<string> GetSaldo(int numeroDaConta)
+        public async Task<ContaCorrente>Depositar(ContaCorrente conta, decimal valor)
         {
-            var conta = await GetConta(numeroDaConta);
-            if (conta is null) return null;
-            return "Saldo disponível: R$" + conta.Saldo;
+            var contaExistente = await GetConta(conta.Numero);
+            contaExistente.Depositar(valor);
+            await Atualizar(contaExistente);
+
+            return contaExistente;
+
+        }
+
+        public async Task<ContaCorrente> Sacar(ContaCorrente conta, decimal valor)
+        {
+            var contaExistente = await GetConta(conta.Numero);
+            contaExistente.Sacar(valor);
+            await Atualizar(contaExistente);
+            
+            return contaExistente;
+        }
+
+        public async Task Atualizar(ContaCorrente conta)
+        {
+            _context.Update(conta);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task<ContaCorrente> NovaConta(ContaCorrente conta)
+        {
+            _context.ContasCorrentes.Add(conta);
+            await _context.SaveChangesAsync();
+
+            return conta;
         }
     }
 }
