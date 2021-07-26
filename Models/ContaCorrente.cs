@@ -32,12 +32,13 @@ namespace FuncionalBank.Models
 
         public void Depositar(decimal valor)
         {
+            if (valor <= 0) throw new ArgumentException("Valor inválido para depósito.");
             _saldo += valor;
         }
 
         public virtual void Sacar(decimal valor)
         {
-            if (valor < 0) throw new ArgumentException("Valor inválido para saque.");
+            if (valor <= 0) throw new ArgumentException("Valor inválido para saque.");
 
             if (_saldo < valor) throw new ArgumentException("Saldo insuficiente");
 
