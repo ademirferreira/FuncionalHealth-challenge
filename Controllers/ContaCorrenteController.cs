@@ -52,14 +52,14 @@ namespace FuncionalBank.Controllers
             return Ok("Saldo disponível: R$" + conta.Saldo);
         }
 
-        [HttpPut("depositar/{numeroDaConta:int}")]
-        public async Task<ActionResult<ContaCorrente>> Depositar(int numeroDaConta, decimal valor)
+        [HttpPut("depositar")]
+        public async Task<ActionResult<ContaCorrente>> Depositar([FromBody] Operacao deposito)
         {
             try
             {
-                var conta = await _repository.GetConta(numeroDaConta);
+                var conta = await _repository.GetConta(deposito.Numero);
                 if (conta is null) return NotFound("Conta não encontrada");
-                var contaDeposito = await _repository.Depositar(conta, valor);
+                var contaDeposito = await _repository.Depositar(conta, deposito.Valor);
 
                 return Ok("Saldo disponível: R$" + contaDeposito.Saldo);
 
@@ -70,14 +70,14 @@ namespace FuncionalBank.Controllers
             }
         }
 
-        [HttpPut("sacar/{numeroDaConta:int}")]
-        public async Task<ActionResult<ContaCorrente>> Sacar(int numeroDaConta, decimal valor)
+        [HttpPut("sacar")]
+        public async Task<ActionResult<ContaCorrente>> Sacar([FromBody] Operacao saque)
         {
             try
             {
-                var conta = await _repository.GetConta(numeroDaConta);
+                var conta = await _repository.GetConta(saque.Numero);
                 if (conta is null) return NotFound("Conta não encontrada");
-                var contaSaque = await _repository.Sacar(conta, valor);
+                var contaSaque = await _repository.Sacar(conta, saque.Valor);
 
                 return Ok("Saldo disponível: R$" + contaSaque.Saldo);
 
